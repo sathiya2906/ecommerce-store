@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ShopEase - Checkout</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">ShopEase</a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="products.html">Products</a>
+        <a href="cart.html">Cart</a>
+        <a href="login.html">Login</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="checkout-page">
+
+      <div class="section-heading">
+        <p>COMPLETE YOUR PURCHASE</p>
+        <h1>Checkout</h1>
+      </div>
+
+      <div class="checkout-layout">
+
+        <div class="checkout-form-card">
+
+          <h2>Shipping Address</h2>
+
+          <form id="checkout-form">
+
+            <label for="fullName">Full Name</label>
+            <input
+              type="text"
+              id="fullName"
+              placeholder="Enter your full name"
+              required
+            >
+
+            <label for="address">Address</label>
+            <textarea
+              id="address"
+              placeholder="Enter your complete address"
+              rows="4"
+              required
+            ></textarea>
+
+            <div class="checkout-row">
+
+              <div>
+                <label for="city">City</label>
+                <input
+                  type="text"
+                  id="city"
+                  placeholder="City"
+                  required
+                >
+              </div>
+
+              <div>
+                <label for="state">State</label>
+                <input
+                  type="text"
+                  id="state"
+                  placeholder="State"
+                  required
+                >
+              </div>
+
+            </div>
+
+            <label for="pincode">Pincode</label>
+            <input
+              type="text"
+              id="pincode"
+              placeholder="6-digit pincode"
+              pattern="[0-9]{6}"
+              maxlength="6"
+              required
+            >
+
+            <h2 class="payment-title">Payment Method</h2>
+
+            <div class="payment-options">
+
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="COD"
+                  checked
+                >
+                <span>
+                  <strong>Cash on Delivery</strong>
+                  <small>Pay when your order arrives</small>
+                </span>
+              </label>
+
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="UPI"
+                >
+                <span>
+                  <strong>UPI</strong>
+                  <small>Pay using your UPI app</small>
+                </span>
+              </label>
+
+              <label class="payment-option">
+                <input
+                  type="radio"
+                  name="paymentMethod"
+                  value="Card"
+                >
+                <span>
+                  <strong>Card</strong>
+                  <small>Credit or debit card</small>
+                </span>
+              </label>
+
+            </div>
+
+            <button type="submit" class="btn checkout-place-btn">
+              Place Order
+            </button>
+
+            <p id="checkout-message" class="auth-message"></p>
+
+          </form>
+
+        </div>
+
+        <div class="checkout-summary">
+
+          <h2>Order Summary</h2>
+
+          <div id="checkout-items">
+            <p>Loading cart...</p>
+          </div>
+
+          <hr>
+
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <strong id="checkout-subtotal">₹0</strong>
+          </div>
+
+          <div class="summary-row">
+            <span>Delivery</span>
+            <strong>FREE</strong>
+          </div>
+
+          <hr>
+
+          <div class="summary-total">
+            <span>Total</span>
+            <strong id="checkout-total">₹0</strong>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2026 ShopEase. All rights reserved.</p>
+  </footer>
+
+  <script src="js/checkout.js"></script>
+  <script src="js/navbar.js"></script>
+</body>
+</html>
