@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'https://ecommerce-store-jalc.onrender.com/api';
 
 async function loadFeaturedProducts() {
   const container = document.getElementById('featured-products');

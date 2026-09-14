@@ -1,4 +1,4 @@
-const NAVBAR_API_URL = 'http://localhost:5000/api';
+const NAVBAR_API_URL = 'https://ecommerce-store-jalc.onrender.com/api';
 
 function updateNavbar() {
   const navLinks = document.querySelector('.nav-links');
