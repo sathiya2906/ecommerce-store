@@ -10,7 +10,7 @@ async function addToCart(productId, productName, button) {
   }
 
   try {
-    const response = await fetch(`${API_URL}/cart/add`, {
+    const response = await fetch(`${API_URL}/cart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
