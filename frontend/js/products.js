@@ -19,7 +19,7 @@ async function addToCart(productId, button) {
   button.textContent = 'Adding...';
 
   try {
-    const response = await fetch(`${API_URL}/cart/add`, {
+   const response = await fetch(`${API_URL}/cart`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
