@@ -1161,3 +1161,65 @@ footer {
     font-size: 0.85rem;
   }
 }
+
+
+/* ===== ADD TO CART BUTTON STYLING ===== */
+
+.product-actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.product-actions .btn {
+  flex: 1;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.product-actions .btn-primary {
+  background: #7c3aed;
+  color: #ffffff;
+  border: 2px solid #7c3aed;
+}
+
+.product-actions .btn-primary:hover {
+  background: #6d28d9;
+  border-color: #6d28d9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.product-actions .btn-secondary {
+  background: transparent;
+  color: #7c3aed;
+  border: 2px solid #7c3aed;
+}
+
+.product-actions .btn-secondary:hover {
+  background: #f5f3ff;
+  border-color: #6d28d9;
+  color: #6d28d9;
+}
+
+@media (max-width: 768px) {
+  .product-actions {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .product-actions .btn {
+    width: 100%;
+  }
+}
+
