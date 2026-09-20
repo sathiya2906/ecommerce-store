@@ -4,6 +4,57 @@ const productsContainer = document.getElementById('products-container');
 const searchInput = document.getElementById('search-input');
 const categoryFilter = document.getElementById('category-filter');
 
+// Add product to cart
+async function addToCart(productId, button) {
+  const token = localStorage.getItem('token');
+
+  if (!token) {
+    alert('Please login first to add items to cart');
+    window.location.href = 'login.html';
+    return;
+  }
+
+  const originalText = button.textContent;
+  button.disabled = true;
+  button.textContent = 'Adding...';
+
+  try {
+    const response = await fetch(`${API_URL}/cart/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        productId: productId,
+        quantity: 1
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to add to cart');
+    }
+
+    button.textContent = '✓ Added!';
+    button.style.backgroundColor = '#16a34a';
+
+    setTimeout(() => {
+      button.textContent = originalText;
+      button.style.backgroundColor = '';
+      button.disabled = false;
+    }, 2000);
+
+  } catch (error) {
+    console.error('Add to cart error:', error);
+
+    alert('Failed to add to cart. Please try again.');
+
+    button.textContent = originalText;
+    button.disabled = false;
+  }
+}
+
+// Load products
 async function loadProducts() {
   const search = searchInput.value.trim();
   const category = categoryFilter.value;
@@ -40,16 +91,22 @@ async function loadProducts() {
           <p>Try a different search or category.</p>
         </div>
       `;
+
       return;
     }
 
     productsContainer.innerHTML = products
-      .map(
-        (product) => `
+      .map((product) => {
+        const imageUrl =
+          product.image?.match(/\((https?:\/\/[^)]+)\)/)?.[1] ||
+          product.image ||
+          '';
+
+        return `
           <div class="product-card">
 
             <img
-              src="${product.image.match(/\((https?:\/\/[^)]+)\)/)?.[1] || product.image}"
+              src="${imageUrl}"
               alt="${product.name}"
             >
 
@@ -69,37 +126,50 @@ async function loadProducts() {
 
                 <strong>₹${product.price}</strong>
 
-                <a
-                  href="product-details.html?id=${product._id}"
-                  class="btn"
-                >
-                  View
-                </a>
+                <div class="product-actions">
+
+                  <a
+                    href="product-details.html?id=${product._id}"
+                    class="btn btn-secondary"
+                  >
+                    View
+                  </a>
+
+                  <button
+                    class="btn btn-primary"
+                    onclick="addToCart('${product._id}', this)"
+                  >
+                    Add to Cart
+                  </button>
+
+                </div>
 
               </div>
 
             </div>
 
           </div>
-        `
-      )
+        `;
+      })
       .join('');
 
   } catch (error) {
-    console.error(error);
+    console.error('Load products error:', error);
 
     productsContainer.innerHTML = `
       <div class="empty-state">
         <h3>Unable to load products</h3>
-        <p>Please make sure the backend server is running.</p>
+        <p>Please try again later.</p>
       </div>
     `;
   }
 }
 
+// Search and category filter
 searchInput.addEventListener('input', loadProducts);
 categoryFilter.addEventListener('change', loadProducts);
 
+// Set initial category
 const urlParams = new URLSearchParams(window.location.search);
 const initialCategory = urlParams.get('category');
 
@@ -107,4 +177,5 @@ if (initialCategory) {
   categoryFilter.value = initialCategory;
 }
 
+// Load products when page opens
 loadProducts();
